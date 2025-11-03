@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 from dotenv import load_dotenv
 from kalshi_python import Configuration, KalshiClient
+from kalshi_python.api import markets_api
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -44,8 +45,7 @@ print()
 print("[2/4] Finding active weather markets...")
 print()
 
-from kalshi_python.markets_api import MarketsApi
-markets_api = MarketsApi(client)
+m_api = markets_api.MarketsApi(client)
 
 # Get active weather markets
 weather_series = ['KXHIGHNY', 'KXHIGHCHI', 'KXHIGHMIA', 'KXHIGHHOU']
@@ -53,7 +53,7 @@ active_markets = []
 
 for series in weather_series:
     try:
-        response = markets_api.get_markets(
+        response = m_api.get_markets(
             series_ticker=series,
             status='open',
             limit=50
@@ -88,7 +88,7 @@ for market in active_markets[:10]:  # Analyze first 10 markets
     
     try:
         # Get order book
-        orderbook = markets_api.get_market_orderbook(ticker=ticker)
+        orderbook = m_api.get_market_orderbook(ticker=ticker)
         
         if not orderbook:
             print("  No order book data")
