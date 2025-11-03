@@ -4464,3 +4464,345 @@ User's instinct to validate with real prices before trading was **100% correct**
 
 **Last Updated:** 2025-11-03 (Historical market data investigation - 0/7064 events had API data available)
 
+---
+
+## 2025-11-03 - Cloud Deployment Guide Created ✅
+
+### Time: Late Evening
+
+User requested cloud deployment options for running forward test instead of locally. Created comprehensive cloud deployment guide with 5 deployment options.
+
+#### New Documentation Created
+
+**1. `Documentation/CLOUD_DEPLOYMENT.md` (450+ lines)** ✅
+
+**Comprehensive cloud deployment guide covering:**
+
+**Section 1: Quick Comparison**
+- Comparison table of all options
+- Cost, complexity, best use cases
+
+**Section 2: Option 1 - AWS Lambda** (Recommended for forward test)
+- Serverless, pay-per-execution
+- EventBridge scheduling
+- S3 state storage
+- Step-by-step setup with code examples
+- Cost: Free tier, then ~$1/month
+
+**Section 3: Option 2 - DigitalOcean Droplet** (Simplest persistent)
+- $6/month, full control
+- Cron scheduling
+- Systemd service setup
+- Persistent local storage
+- Step-by-step setup
+
+**Section 4: Option 3 - Railway** (Easiest managed)
+- Free tier, automatic deployments
+- GitHub integration
+- Managed infrastructure
+- Quick setup guide
+
+**Section 5: Option 4 - GitHub Actions** (Free scheduled tasks)
+- Completely free
+- Built-in scheduling
+- Repository integration
+- Workflow YAML examples
+- State storage options (S3, artifacts)
+
+**Section 6: Option 5 - AWS EC2** (Full trading bot)
+- Persistent server
+- Full control
+- Systemd service setup
+- AWS integration
+
+**Section 7: Comparison Matrix**
+- Feature-by-feature comparison
+- Cost, setup time, best use cases
+
+**Section 8: Recommended Approach**
+- Forward test → AWS Lambda or GitHub Actions
+- Full bot → DigitalOcean or EC2
+- Quick start → GitHub Actions
+
+**Section 9: Security Best Practices**
+- Never commit credentials
+- Environment variables
+- Cloud secrets management
+
+**Section 10: Monitoring & Troubleshooting**
+- CloudWatch setup
+- Log monitoring
+- Common issues and solutions
+
+#### Key Features
+
+**Multiple Options:**
+1. AWS Lambda - Serverless, scheduled (best for forward test)
+2. DigitalOcean - Simple, persistent ($6/month)
+3. Railway - Managed, easy deployment
+4. GitHub Actions - Free, scheduled tasks
+5. AWS EC2 - Full control, persistent
+
+**Complete Setup Guides:**
+- Step-by-step instructions for each option
+- Code examples and config files
+- Scheduling setup (cron, EventBridge, workflows)
+- State persistence solutions
+
+**Security Focus:**
+- Environment variables
+- Secrets management
+- Best practices
+
+**Practical Details:**
+- Cost estimates
+- Setup time estimates
+- Pros/cons for each option
+- Use case recommendations
+
+#### Recommendations by Use Case
+
+**Forward Test Only (Scheduled Daily Runs):**
+- ✅ **AWS Lambda** - Serverless, automatic scheduling
+- ✅ **GitHub Actions** - Free, no infrastructure
+
+**Full Trading Bot (24/7):**
+- ✅ **DigitalOcean Droplet** - Simple, $6/month
+- ✅ **AWS EC2** - AWS integration, scalable
+
+**Quick Start (Easiest):**
+- ✅ **GitHub Actions** - 15-minute setup, free
+
+#### Next Steps for User
+
+1. **Choose deployment option** based on needs:
+   - Forward test only → AWS Lambda or GitHub Actions
+   - Full bot → DigitalOcean or EC2
+   - Quick start → GitHub Actions
+
+2. **Follow setup steps** in `CLOUD_DEPLOYMENT.md`
+
+3. **Test manually** before enabling scheduling
+
+4. **Monitor first few runs** closely
+
+5. **Set up alerts** for failures
+
+#### Files Created
+
+**Documentation (1 file, ~450 lines):**
+1. `Documentation/CLOUD_DEPLOYMENT.md` - Complete cloud deployment guide
+
+**Total:** 1 file, ~450 lines
+
+---
+
+**Last Updated:** 2025-11-03 (Cloud deployment guide created with 5 deployment options)
+
+---
+
+## 2025-11-03 - DigitalOcean Deployment Setup Complete ✅
+
+### Time: Late Evening (Continued)
+
+User chose DigitalOcean Droplet deployment option ($6/month). Created complete setup automation and comprehensive guide.
+
+#### Files Created
+
+**1. `deploy/digitalocean_setup.sh` (220+ lines)** ✅
+- **Purpose:** Automated setup script for DigitalOcean droplet
+- **Features:**
+  - System updates and package installation
+  - Python 3.10 and virtual environment setup
+  - Repository cloning (GitHub)
+  - Dependency installation
+  - Environment configuration (.env setup)
+  - Directory creation (logs, metrics, data)
+  - Cron job installation (morning + evening + health check)
+  - Log rotation configuration
+  - Interactive prompts for configuration
+- **Usage:** Run on fresh DigitalOcean droplet
+- **Status:** Executable, ready to use
+
+**2. `deploy/DIGITALOCEAN_SETUP.md` (500+ lines)** ✅
+- **Purpose:** Complete step-by-step DigitalOcean deployment guide
+- **Contents:**
+  - Prerequisites (account, SSH keys)
+  - Step 1: Create Droplet (web UI instructions)
+  - Step 2: SSH Into Droplet (Windows/Mac/Linux)
+  - Step 3: Run Setup Script (automated vs manual)
+  - Step 4: Manual Setup (fallback option)
+  - Step 5: Test Setup (verify everything works)
+  - Step 6: Verify Scheduled Runs
+  - Step 7: Monitoring & Maintenance
+  - Step 8: Update Code
+  - Troubleshooting section (common issues)
+  - Security Best Practices
+  - Cost Management
+  - Next Steps
+  - Useful Commands Cheat Sheet
+- **Status:** Complete guide with all details
+
+**3. `deploy/README.md` (40+ lines)** ✅
+- **Purpose:** Quick reference for deployment directory
+- **Contents:** Overview, quick start, file descriptions
+
+#### Setup Script Features
+
+**Automated Installation:**
+- System packages (Python 3.10, git, cron, etc.)
+- Python virtual environment
+- Project dependencies (requirements.txt)
+- Cron jobs (4 scheduled tasks)
+- Log rotation (30-day retention)
+
+**Cron Jobs Installed:**
+1. **Morning predictions** - 9 AM EST (14:00 UTC)
+2. **Evening settlement** - 8 PM EST (01:00 UTC)
+3. **Daily health check** - Noon EST (17:00 UTC)
+4. **Weekly analysis** - Monday 2 AM EST (07:00 UTC)
+
+**Interactive Configuration:**
+- Prompts for .env file setup
+- Waits for user to configure credentials
+- Validates repository access
+
+#### Deployment Options
+
+**Option A: Automated Setup (Recommended)**
+- Run setup script from GitHub
+- Clone repository automatically
+- All configuration automated
+
+**Option B: Manual Setup**
+- Step-by-step manual instructions
+- Upload files via SCP/rsync
+- Full control over each step
+
+#### Key Setup Steps
+
+1. **Create Droplet** - DigitalOcean web UI ($6/month)
+2. **SSH Into Droplet** - `ssh root@YOUR_IP`
+3. **Run Setup Script** - Automated installation
+4. **Configure .env** - Add Kalshi credentials
+5. **Test Manually** - Verify scripts work
+6. **Monitor First Run** - Check logs tomorrow
+
+#### Cost Breakdown
+
+- **Droplet**: $6/month (Basic plan, Ubuntu 22.04)
+- **Bandwidth**: Free (first 1TB included)
+- **Storage**: Included (25GB SSD)
+- **Optional Backups**: +$1/month (daily)
+- **Optional Monitoring**: +$1/month (alerts)
+- **Total**: ~$6-8/month
+
+#### Security Features
+
+**Built-in:**
+- SSH key authentication (recommended)
+- Firewall setup instructions
+- Secure .env file handling
+- Log rotation to prevent disk fill
+- System update instructions
+
+**Best Practices:**
+- Disable password login after SSH key setup
+- Restrict file permissions (.env, keys)
+- Regular system updates
+- UFW firewall configuration
+
+#### Testing & Verification
+
+**Test Commands:**
+```bash
+# Test morning script
+cd /opt/weather-hunters && source venv/bin/activate
+python scripts/paper_trade_morning.py
+
+# Test settlement script
+python scripts/settle_live_data.py
+
+# Check cron jobs
+crontab -l
+
+# Monitor logs
+tail -f logs/cron_morning.log
+```
+
+**Verification Checklist:**
+- ✅ Scripts run without errors
+- ✅ Logs are created
+- ✅ .env file configured
+- ✅ Cron jobs installed
+- ✅ Dependencies installed
+- ✅ Directories created
+
+#### Troubleshooting Guide
+
+**Common Issues:**
+- Cron jobs not running → Check cron service
+- Script errors → Check logs, run manually
+- Permission issues → Check file permissions
+- Missing dependencies → Reinstall requirements
+- API connection issues → Verify .env credentials
+- Timezone issues → Verify UTC conversion
+
+**Debug Commands:**
+```bash
+# Check cron service
+systemctl status cron
+
+# Check cron logs
+grep CRON /var/log/syslog
+
+# Test API connection
+python -c "from src.api.kalshi_connector import create_connector_from_env; ..."
+
+# View error logs
+cat logs/cron_morning.log
+cat logs/cron_settle.log
+```
+
+#### Next Steps for User
+
+1. **Create DigitalOcean account** (if not already)
+2. **Create droplet** ($6/month, Ubuntu 22.04)
+3. **SSH into droplet** and run setup script
+4. **Configure .env** file with Kalshi credentials
+5. **Test manually** before enabling scheduling
+6. **Monitor first run** tomorrow morning (9 AM EST)
+7. **Check logs** after first settlement (8 PM EST)
+
+#### Files Created This Session
+
+**Deployment Scripts (1 file, ~220 lines):**
+1. `deploy/digitalocean_setup.sh` - Automated setup script
+
+**Documentation (2 files, ~540 lines):**
+1. `deploy/DIGITALOCEAN_SETUP.md` - Complete setup guide
+2. `deploy/README.md` - Deployment directory overview
+
+**Total:** 3 files, ~760 lines
+
+#### Status
+
+✅ **Complete Setup Automation**
+- Automated installation script ready
+- Comprehensive guide created
+- Cron jobs configured
+- Security best practices included
+- Troubleshooting guide provided
+
+✅ **Ready to Deploy**
+- Script is executable
+- Instructions are complete
+- Test commands provided
+- Monitoring guide included
+
+**Next Action:** User can now deploy to DigitalOcean following `deploy/DIGITALOCEAN_SETUP.md`
+
+---
+
+**Last Updated:** 2025-11-03 (DigitalOcean deployment setup complete with automated script)
+
